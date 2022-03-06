@@ -144,4 +144,31 @@
 		</footer>
 		<!--页脚结束-->
 	</body>
+	<script type="text/javascript">
+		//监听注册按钮,转方法为匿名参数提交
+		$("#btn-login").click(
+				function () {
+					//发送ajax 的异步请求
+					$.ajax({
+						url:"/users/login",//定位到UserController方法
+						type:"post",
+						//serialize检测每个控件，自动拼接 username=Tom&password=123
+						data:$("#form-login").serialize(),
+						dataType:"json",
+						//state,message,data
+						success:function(json){
+							if(json.state ==200){
+								alert("登录成功");
+								location.href="index.html";
+							}else{
+								alert("登录失败");
+							}
+						},
+						error:function(xhr){
+							alert(xhr.status);
+						}
+					});
+
+				});
+	</script>
 </html>
